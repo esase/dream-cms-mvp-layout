@@ -1,6 +1,7 @@
 /*
 !.gitignore
 !CHANGELOG.txt
+!LICENSE
 !README.md
 !/module
 /module/*
