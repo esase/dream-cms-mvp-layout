@@ -1,0 +1,13 @@
+<?php if (!isset($this->notification) || $this->notification === true): ?>
+    <!-- notification -->
+    <?php echo $this->partial('partial/notification') ?>
+<?php endif ?>
+
+<section>
+    <div class="heading-block">
+        <h4>
+            <?php echo $this->title ?>
+        </h4>
+    </div>
+    <?php echo $this->body ?>
+</section>

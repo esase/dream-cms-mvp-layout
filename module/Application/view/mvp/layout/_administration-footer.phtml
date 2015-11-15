@@ -1,0 +1,19 @@
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="container">
+                <p class="pull-<?php if ($this->localization()->isCurrentLanguageLtr()): ?>left<?php else: ?>right<?php endif ?>">
+                    &copy; <?php echo date('Y') ?> <?php echo $this->applicationSetting('application_site_name') ?>
+                </p>
+                <p class="pull-<?php if ($this->localization()->isCurrentLanguageLtr()): ?>right<?php else: ?>left<?php endif ?>">
+                    <a target="_blank" href="<?php echo $this->applicationConfig('support_url') ?>">
+                        <?php echo $this->escapeHtml($this->applicationSetting('application_generator')) ?> <?php echo $this->escapeHtml($this->applicationSetting('application_generator_version')) ?>
+                    </a>
+                </p>
+                <div class="clearfix"></div>
+            </div>
+        </footer>
+        <?php echo $this->inlineScript() ?>
+    </body>
+</html>
