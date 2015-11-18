@@ -1,0 +1,72 @@
+<?php echo $this->doctype() ?>
+<html dir="<?php echo $this->localization()->getCurrentLanguageDirection() ?>" lang="<?php echo $this->localization()->getCurrentLanguage() ?>">
+    <head>
+        <?php echo $this->pageInjectWidget('head') ?>
+        <meta charset="utf-8">
+        <?php echo $this->headTitle($this->applicationSetting('application_site_name'))->setSeparator(' - ')->setAutoEscape(false)->setTranslatorEnabled(false) ?>
+        <base href="<?php echo $this->serverUrl() . $this->basePath() . '/' ?>" />
+
+        <?php echo $this->headMeta()
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+            ->appendName('viewport', 'width=device-width, initial-scale=1')
+            ->appendName('generator', $this->applicationSetting('application_generator'))
+        ?>
+
+        <!-- styles -->
+        <?php $this->layoutHeadLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->layoutAsset('icon/favicon.ico', 'image')])
+            ->prependStylesheet($this->layoutAsset('mvpready-landing.css', 'css'))
+            ->prependStylesheet($this->layoutAsset('font-awesome.css', 'css'))
+            ->prependStylesheet($this->layoutAsset('frontend.css', 'css')) 
+            ->prependStylesheet($this->layoutAsset('jquery-ui.css', 'css'))
+            ->prependStylesheet($this->layoutAsset('sm-simple.css', 'css'))
+            ->prependStylesheet($this->layoutAsset('sm-core-css.css', 'css'))
+            ->prependStylesheet($this->layoutAsset('bootstrap-theme.css', 'css'))
+            ->prependStylesheet($this->layoutAsset('bootstrap.css', 'css'))
+        ?>
+
+        <?php if (!$this->localization()->isCurrentLanguageLtr()): ?>
+            <?php $this->layoutHeadLink()
+                ->appendStylesheet($this->layoutAsset('bootstrap.rtl.css', 'css'))
+                ->appendStylesheet($this->layoutAsset('frontend.rtl.css', 'css'))?>
+        <?php endif; ?>
+
+        <?php echo $this->layoutHeadLink() ?>
+
+        <!-- Google Font: Open Sans -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,800,800italic">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:400,300,700">
+
+        <!-- scripts -->
+        <?php echo $this->layoutHeadScript()
+            ->prependFile($this->layoutAsset('mvpready-landing.js'))
+            ->prependFile($this->layoutAsset('mvpready-helpers.js'))
+            ->prependFile($this->layoutAsset('mvpready-core.js'))
+            ->prependFile($this->layoutAsset('jquery.waitforimages.js'))
+            ->prependFile($this->layoutAsset('functions.js'))
+            ->prependFile($this->layoutAsset('require.js'))
+            ->prependFile($this->layoutAsset('jquery.cookie.js'))
+            ->prependFile($this->layoutAsset('bootstrap.js'))
+            ->prependFile($this->layoutAsset('jquery.ui.touch-punch.js'))
+            ->prependFile($this->layoutAsset('jquery-ui.js'))            
+            ->prependFile($this->layoutAsset('jquery.js'))
+            ->prependFile($this->layoutAsset('respond.js'), 'text/javascript', ['conditional' => 'lt IE 9'])
+            ->prependFile($this->layoutAsset('html5shiv.js'), 'text/javascript', ['conditional' => 'lt IE 9'])
+        ?>
+    </head>
+    <body>
+        <div id="wrapper">
+            <header class="navbar" role="banner">
+                <div class="container">
+                    <div class="navbar-header">
+                        <a href="<?php echo  $this->url('page', [], ['force_canonical' => true]) ?>" class="navbar-brand navbar-brand-img">
+                            <img alt="<?php echo $this->escapeHtmlAttr($this->applicationSetting('application_site_name')) ?>" src="<?php echo $this->layoutAsset('landing-logo.png', 'image') ?>">
+                        </a>
+
+                        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <i class="fa fa-bars"></i>
+                        </button>
+                    </div> <!-- /.navbar-header -->
+                    <?php echo $this->pageMenu(2) /* get menu items with the max nested level 2 */ ?>
+                </div> <!-- /.container -->
+            </header>
