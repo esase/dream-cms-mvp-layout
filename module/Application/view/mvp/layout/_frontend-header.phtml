@@ -27,8 +27,9 @@
         <?php if (!$this->localization()->isCurrentLanguageLtr()): ?>
             <?php $this->layoutHeadLink()
                 ->appendStylesheet($this->layoutAsset('bootstrap.rtl.css', 'css'))
-                ->appendStylesheet($this->layoutAsset('frontend.rtl.css', 'css'))?>
-        <?php endif; ?>
+                ->appendStylesheet($this->layoutAsset('frontend.rtl.css', 'css'))
+                ->appendStylesheet($this->layoutAsset('mvpready-landing.rtl.css', 'css')) ?>
+        <?php endif ?>
 
         <?php echo $this->layoutHeadLink() ?>
 
@@ -47,13 +48,14 @@
             ->prependFile($this->layoutAsset('jquery.cookie.js'))
             ->prependFile($this->layoutAsset('bootstrap.js'))
             ->prependFile($this->layoutAsset('jquery.ui.touch-punch.js'))
-            ->prependFile($this->layoutAsset('jquery-ui.js'))            
+            ->prependFile($this->layoutAsset('jquery-ui.js'))
             ->prependFile($this->layoutAsset('jquery.js'))
             ->prependFile($this->layoutAsset('respond.js'), 'text/javascript', ['conditional' => 'lt IE 9'])
             ->prependFile($this->layoutAsset('html5shiv.js'), 'text/javascript', ['conditional' => 'lt IE 9'])
         ?>
     </head>
     <body>
+        <?php echo $this->pageInjectWidget('body') ?>
         <div id="wrapper">
             <header class="navbar" role="banner">
                 <div class="container">

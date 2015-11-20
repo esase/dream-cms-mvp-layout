@@ -1,0 +1,38 @@
+.dropdown-menu {
+    left: 0;
+    right: auto;
+    }
+
+.navbar .dropdown-menu::before, .navbar .dropdown-menu::after {
+    right: auto;
+    left: 9px;
+}
+
+.navbar .dropdown-menu::after {
+    right: auto;
+    left: 10px;
+}
+
+.heading-block {
+    text-align: right;
+}
+
+header.navbar .navbar-nav > .navbar-profile .dropdown-toggle {
+    padding-left: 15px;
+    padding-right: 50px;
+}
+
+header.navbar .navbar-profile-avatar {
+    left: auto;
+    right: 12px;
+}
+
+header.navbar .navbar-profile-avatar {
+    margin-right: 0;
+    margin-left: .65em;
+}
+
+.dropdown-icon {
+    margin-right: 0;
+    margin-left: 8px;
+}

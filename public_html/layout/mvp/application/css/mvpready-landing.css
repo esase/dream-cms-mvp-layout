@@ -11,6 +11,35 @@
 * Website: http://jumpstartthemes.com
 *
 * ======================================================== */
+
+.navbar-profile-avatar {
+  position: relative;
+  top: -1px;
+  width: 30px;
+  margin-right: .65em;
+  border: 2px solid #87a3bc;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.navbar-profile-label-visible {
+  display: inline !important;
+}
+.navbar-nav > .navbar-profile .dropdown-toggle {
+  padding-left: 50px;
+}
+.navbar-nav > .navbar-profile .dropdown-toggle:hover .navbar-profile-avatar,
+.navbar-nav > .navbar-profile.open .navbar-profile-avatar {
+  border-color: #ffffff;
+}
+.navbar-profile-avatar {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  margin-top: -14px;
+}
+
 body {
   padding: 0;
   margin: 0;
@@ -652,6 +681,7 @@ fieldset[disabled] .btn-transparent.active {
 }
 .alert {
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+  background-image: none;
 }
 .alert strong {
   font-weight: 600;
