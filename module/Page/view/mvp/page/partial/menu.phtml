@@ -1,0 +1,106 @@
+<?php $this->declareVars('localizationPages') ?>
+<?php $this->localizationPages = new ArrayObject ?>
+
+<nav class="collapse navbar-collapse" role="navigation" id="main-site-navigation">
+    <ul class="nav navbar-nav navbar-<?php if (!$this->localization()->isCurrentLanguageLtr()): ?>left<?php else: ?>right<?php endif ?> mainnav-menu">
+        <li>
+            <a href="<?php echo $this->url('page') ?>">
+                <?php echo $this->translate('Home') ?>
+            </a>
+        </li>
+
+        <?php echo $this->menu_items ?>
+
+        <?php if (count($this->localization()->getAllLocalizations()) > 1): ?>
+
+            <?php foreach($this->localization()->getAllLocalizations() as $language): ?>
+                <?php if (empty($this->page['dynamic_page']) && false !== $this->pageUrl($this->page['slug'], [], $language['language'])): ?>
+                <?php
+                    $this->localizationPages[$language['language']]['url'] = $this->pageUrl($this->page['slug'], [], $language['language']);
+                    $this->localizationPages[$language['language']]['exists'] = true;
+                ?>
+                <?php elseif (false !== $this->pageUrl(null, [], $language['language'])): ?>
+                <?php
+                    $this->localizationPages[$language['language']]['url'] = $this->pageUrl(null, [], $language['language']);
+                    $this->localizationPages[$language['language']]['exists'] = false;
+                ?>
+                <?php endif ?>
+            <?php endforeach ?>
+
+            <?php if (count($this->localizationPages) > 1): ?>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="javascript:;" data-toggle="dropdown">
+                        <img src="<?php  echo $this->layoutAsset('icon/flag/' . $this->escapeHtml($this->localization()->getCurrentLocalization()['language']) . '.gif', 'image') ?>" alt="<?php echo $this->escapeHtmlAttr($this->localization()->getCurrentLocalization()['description']) ?>" />
+                        <?php echo $this->escapeHtml($this->localization()->getCurrentLocalization()['description']) ?>
+                        <i class="fa fa-caret-down"></i>
+                    </a>
+
+                    <ul class="dropdown-menu" role="menu">
+                        <?php foreach ($this->localizationPages as $language => $page): ?>
+                            <li <?php if ($language == $this->localization()->getCurrentLanguage()): ?>class="disabled"<?php endif ?>>
+                                <a href="<?php echo $this->url('page', ['language' => $language, 'page_name' => $page['url']], ['force_canonical' => true, 'query' => ($page['exists'] ? $this->applicationRoute()->getQuery() : [])], true) ?>">
+                                    <img src="<?php  echo $this->layoutAsset('icon/flag/' . $this->escapeHtml($language) . '.gif', 'image') ?>" alt="<?php echo $this->escapeHtmlAttr($this->localization()->getAllLocalizations()[$language]['description']) ?>" />
+                                    <?php echo $this->escapeHtml($this->localization()->getAllLocalizations()[$language]['description']) ?>
+                                </a>
+                            </li>
+                        <?php endforeach ?>
+                    </ul>
+                </li>
+            <?php endif ?>
+        <?php endif ?>
+
+        <?php if(!$this->userIsGuest()): ?>
+            <?php $this->declareVars('userPage') ?>
+            <?php $this->userPage = $this->pageUrl('user', [], null, true) ?>
+            <li class="dropdown navbar-profile">
+                <a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle">
+                    <img alt="<?php echo $this->escapeHtmlAttr($this->userIdentity()['nick_name']) ?>" class="navbar-profile-avatar" src="<?php echo $this->escapeHtmlAttr($this->userAvatarUrl($this->userIdentity()['avatar'])) ?>">
+                    <span class="visible-xs-inline"><?php echo $this->userIdentity()['nick_name'] ?> &nbsp;</span>
+                    <i class="fa fa-caret-down"></i>
+                </a>
+                <ul role="menu" class="dropdown-menu">
+                    <?php if ($this->pageUserMenu()): ?>
+                        <?php foreach($this->pageUserMenu() as $menu) : ?>
+                            <li>
+                                <a href="<?php echo $this->url('page', ['page_name' => $menu['url']], ['force_canonical' => true]) ?>">
+                                    <?php echo $menu['title'] ?>
+                                </a>
+                            </li>
+                        <?php endforeach ?>
+                        <li class="divider"></li>
+                    <?php endif ?>
+                    <?php if (false !== $this->userPage): ?>
+                        <li>
+                            <a href="<?php echo $this->url('page', ['page_name' => $this->userPage, 'slug' => $this->userIdentity()['slug']], ['force_canonical' => true]) ?>">
+                                <i class="fa fa-user"></i>
+                                &nbsp;&nbsp;<?php echo $this->translate('User profile') ?>
+                            </a>
+                        </li>
+                    <?php endif ?>
+                    <li>
+                        <a href="javascript:void(0)" onclick="ajaxQuery('logged-user-menu', '<?php echo $this->url('application/page', ['controller' => 'user-ajax', 'action' => 'ajax-logout']) ?>', function(){location.href='<?php echo $this->url('page', [], ['force_canonical' => true]) ?>'}, 'post', {}, false)">
+                            <i class="fa fa-sign-out"></i>
+                            &nbsp;&nbsp;<?php echo $this->translate('Logout') ?>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        <?php endif ?>
+    </ul>
+</nav>
+
+<?php $this->inlineScript()->captureStart() ?>
+    $( document ).ready(function() {
+        var $activeMenuItem = $("#main-site-navigation li[data-status='active']");
+
+        if ($activeMenuItem) {
+            // set current element as active
+            if (!$activeMenuItem.parents("li:first").length) {
+                $activeMenuItem.addClass("active");
+            }
+            else {
+                $activeMenuItem.parents("li:first").addClass("active");
+            }
+        }
+    });
+<?php $this->inlineScript()->captureEnd() ?>

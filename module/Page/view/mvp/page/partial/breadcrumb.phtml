@@ -1,0 +1,28 @@
+<?php $this->declareVars('breadcrumbContent', 'breadcrumbCount') ?>
+<?php $this->breadcrumbCount = count($this->breadcrumb) ?>
+
+<?php $this->placeholder('breadcrumbContent')->captureStart() ?>
+<?php foreach($this->breadcrumb as $index => $page) : ?>
+    <?php if ($index + 1 >= $this->breadcrumbCount): ?>
+        <?php $this->currentPageTitle = $page['title'] ?>
+        <?php continue ?>
+    <?php endif ?>
+
+    &nbsp;&nbsp;/
+    <?php if (!$page['url']) : ?>
+        <span><?php echo $page['title'] ?></span>
+    <?php else: ?>
+        <a href="<?php echo $this->url('page', ['page_name' => $page['url']], ['force_canonical' => true]) ?>">
+            <?php echo $page['title'] ?>
+        </a>
+    <?php endif ?>
+<?php endforeach ?>
+<?php $this->placeholder('breadcrumbContent')->captureEnd() ?>
+
+<div class="masthead">
+    <div class="container">
+        <h1 class="masthead-subtitle">
+            <?php echo $this->currentPageTitle ?>
+        </h1>
+    </div> <!-- /.container -->
+</div>

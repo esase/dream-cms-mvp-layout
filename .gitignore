@@ -11,6 +11,11 @@
 !/module/Application/view
 /module/Application/view/*
 !/module/Application/view/mvp
+!/module/Page
+/module/Page/*
+!/module/Page/view
+/module/Page/view/*
+!/module/Page/view/mvp
 !/public_html
 /public_html/*
 !/public_html/layout

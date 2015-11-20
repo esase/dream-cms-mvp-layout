@@ -1,0 +1,15 @@
+<?php if($this->children): ?>
+    <li class="dropdown<?php if($this->active && $this->is_sub_item): ?>disabled<?php endif ?>" data-status="<?php if($this->active): ?>active<?php endif ?>">
+        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+            <?php echo $this->title ?>
+            <i class="fa fa-caret-down navbar-caret"></i>
+        </a>
+<?php else: ?>
+    <li <?php if($this->active): ?>data-status="active"<?php endif ?> <?php if($this->active && $this->is_sub_item): ?>class="disabled"<?php endif ?>>
+        <a href="<?php echo $this->url('page', ['page_name' => $this->url], ['force_canonical' => true]) ?>">
+            <?php if($this->is_sub_item) :?>
+                <i class="fa fa-angle-double-right dropdown-icon"></i>
+            <?php endif ?>
+            <?php echo $this->title ?>
+        </a>
+<?php endif ?>
