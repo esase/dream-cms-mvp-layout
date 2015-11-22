@@ -60,6 +60,7 @@
             <header class="navbar" role="banner">
                 <div class="container">
                     <div class="navbar-header">
+                        <?php echo $this->pageInjectWidget('logo') ?>
                         <a href="<?php echo  $this->url('page', [], ['force_canonical' => true]) ?>" class="navbar-brand navbar-brand-img">
                             <img alt="<?php echo $this->escapeHtmlAttr($this->applicationSetting('application_site_name')) ?>" src="<?php echo $this->layoutAsset('landing-logo.png', 'image') ?>">
                         </a>
