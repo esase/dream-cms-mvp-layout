@@ -1,17 +1,3 @@
-/* ========================================================
-*
-* MVP Ready - Lightweight & Responsive Admin Template
-*
-* ========================================================
-*
-* File: mvpready-admin.js
-* Theme Version: 2.1.0
-* Bootstrap Version: 3.3.5
-* Author: Jumpstart Themes
-* Website: http://mvpready.com
-*
-* ======================================================== */
-
 var mvpready_admin = function () {
 
   "use strict"
@@ -51,8 +37,8 @@ var mvpready_admin = function () {
     }
   }
 
-}()
+}();
 
 $(function () {
-  mvpready_admin.init ()
-})
+  mvpready_admin.init ();
+});
