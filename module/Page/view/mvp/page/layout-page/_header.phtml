@@ -37,5 +37,15 @@
     <?php $this->headMeta()->appendName('robots', $this->page['meta_robots']) ?>
 <?php endif ?>
 
-<?php echo $this->pageBreadcrumb()
-    ->setBreadcrumb($this->breadcrumb)->setPage($this->page)->getBreadcrumb() ?>
+<?php if (!$this->breadcrumb): ?>
+    <div class="masthead">
+        <div class="container">
+            <h1 class="masthead-subtitle">
+                <?php echo $this->applicationSetting('application_site_name') ?>
+            </h1>
+        </div> <!-- /.container -->
+    </div>
+<?php else: ?>
+    <?php echo $this->pageBreadcrumb()
+        ->setBreadcrumb($this->breadcrumb)->setPage($this->page)->getBreadcrumb() ?>
+<?php endif ?>
